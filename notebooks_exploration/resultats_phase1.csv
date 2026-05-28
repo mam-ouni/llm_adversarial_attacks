@@ -1,0 +1,2 @@
+"original_text","perturbed_text","original_score","perturbed_score","original_output","perturbed_output","ground_truth_output","num_queries","result_type"
+"[[The]] [[cast]] [[performed]] [[brilliantly]] in this [[cinematic]] [[masterpiece]].","[[Both]] [[thrown]] [[fulfil]] [[eloquently]] in this [[cinematographic]] [[shaft]].",0.00012135505676269531,0.9891396164894104,1,0,1,128,"Successful"
