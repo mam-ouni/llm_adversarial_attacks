@@ -1,0 +1,47 @@
+16:10:06 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\02_statistical_tests_20260530_161006.log
+16:10:06 | INFO | ============================================================
+16:10:06 | INFO | XAI Adversarial Attack Audit — Statistical Analysis
+16:10:06 | INFO | ============================================================
+16:10:06 | INFO | Loaded 1614 records from attack_raw_results.csv
+16:10:06 | INFO | Models: ['bert-tiny', 'distilbert', 'bert-base']
+16:10:06 | INFO | Attacks: ['textfooler', 'pwws']
+16:10:06 | INFO | Seeds: [42, 123, 999]
+16:10:06 | INFO | Per-seed results saved → per_seed_results.csv
+16:10:06 | INFO | Statistical summary saved → statistical_summary.csv
+16:10:06 | INFO | 
+────────────────────────────────────────────────────────────
+16:10:06 | INFO | Thesis-ready summary (mean ± std, n=3 seeds):
+16:10:06 | INFO | ────────────────────────────────────────────────────────────
+16:10:06 | INFO | Model        Attack        Clean acc    Adv acc     Drop      ASR   USE sim
+16:10:06 | INFO | ───────────────────────────────────────────────────────────────────────────
+16:10:06 | INFO | bert-base    pwws            100.0%     15.2%   84.8%   84.8%    0.789
+16:10:06 | INFO | bert-base    textfooler      100.0%      2.2%   97.8%   97.8%    0.777
+16:10:06 | INFO | bert-tiny    pwws            100.0%      8.4%   91.6%   91.6%    0.845
+16:10:06 | INFO | bert-tiny    textfooler      100.0%      0.0%  100.0%  100.0%    0.833
+16:10:06 | INFO | distilbert   pwws            100.0%     11.7%   88.3%   88.3%    0.805
+16:10:06 | INFO | distilbert   textfooler      100.0%      2.1%   97.9%   97.9%    0.812
+16:10:06 | INFO | 
+────────────────────────────────────────────────────────────
+16:10:06 | INFO | McNemar tests (pooled across seeds):
+16:10:06 | INFO | ────────────────────────────────────────────────────────────
+16:10:06 | INFO |   bert-base    × pwws         | b= 234 c=   0 | χ²=  232.00 | p=0.000000 ***
+16:10:06 | INFO |   bert-base    × textfooler   | b= 270 c=   0 | χ²=  268.00 | p=0.000000 ***
+16:10:06 | INFO |   bert-tiny    × pwws         | b= 228 c=   0 | χ²=  226.00 | p=0.000000 ***
+16:10:06 | INFO |   bert-tiny    × textfooler   | b= 249 c=   0 | χ²=  247.00 | p=0.000000 ***
+16:10:06 | INFO |   distilbert   × pwws         | b= 249 c=   0 | χ²=  247.00 | p=0.000000 ***
+16:10:06 | INFO |   distilbert   × textfooler   | b= 276 c=   0 | χ²=  274.00 | p=0.000000 ***
+16:10:06 | INFO | 
+McNemar results saved → mcnemar_tests.csv
+16:10:06 | INFO | 
+────────────────────────────────────────────────────────────
+16:10:06 | INFO | Effect size — Cohen's h (clean_acc vs attacked_acc):
+16:10:06 | INFO | ────────────────────────────────────────────────────────────
+16:10:06 | INFO |   h > 0.2 small | h > 0.5 medium | h > 0.8 large
+16:10:06 | INFO |   bert-base    × pwws         | h = 2.340 (large)
+16:10:06 | INFO |   bert-base    × textfooler   | h = 2.846 (large)
+16:10:06 | INFO |   bert-tiny    × pwws         | h = 2.552 (large)
+16:10:06 | INFO |   bert-tiny    × textfooler   | h = 3.142 (large)
+16:10:06 | INFO |   distilbert   × pwws         | h = 2.443 (large)
+16:10:06 | INFO |   distilbert   × textfooler   | h = 2.849 (large)
+16:10:06 | INFO | 
+All statistical outputs saved to results/tables/

@@ -1,0 +1,26 @@
+pair_label,text,expected,predicted,correct,token,attribution
+Single negation,I don't think that this film is good,negative,negative,1,[CLS],-0.356602
+Single negation,I don't think that this film is good,negative,negative,1,i,-0.154074
+Single negation,I don't think that this film is good,negative,negative,1,don,-0.446011
+Single negation,I don't think that this film is good,negative,negative,1,',-0.168271
+Single negation,I don't think that this film is good,negative,negative,1,t,-0.634293
+Single negation,I don't think that this film is good,negative,negative,1,think,-0.908112
+Single negation,I don't think that this film is good,negative,negative,1,that,-1.01915
+Single negation,I don't think that this film is good,negative,negative,1,this,0.270743
+Single negation,I don't think that this film is good,negative,negative,1,film,-0.231925
+Single negation,I don't think that this film is good,negative,negative,1,is,-0.075799
+Single negation,I don't think that this film is good,negative,negative,1,good,0.244137
+Single negation,I don't think that this film is good,negative,negative,1,[SEP],0.826561
+Double negation,I don't think that this film is not good,positive,negative,0,[CLS],-0.560697
+Double negation,I don't think that this film is not good,positive,negative,0,i,-0.220696
+Double negation,I don't think that this film is not good,positive,negative,0,don,-0.300875
+Double negation,I don't think that this film is not good,positive,negative,0,',0.054433
+Double negation,I don't think that this film is not good,positive,negative,0,t,-0.102889
+Double negation,I don't think that this film is not good,positive,negative,0,think,-0.281514
+Double negation,I don't think that this film is not good,positive,negative,0,that,-0.167977
+Double negation,I don't think that this film is not good,positive,negative,0,this,-0.085795
+Double negation,I don't think that this film is not good,positive,negative,0,film,-0.087522
+Double negation,I don't think that this film is not good,positive,negative,0,is,-0.055967
+Double negation,I don't think that this film is not good,positive,negative,0,not,-0.961921
+Double negation,I don't think that this film is not good,positive,negative,0,good,-0.417078
+Double negation,I don't think that this film is not good,positive,negative,0,[SEP],-2.321188

@@ -1,0 +1,131 @@
+15:29:09 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\01_run_attacks_20260529_152909.log
+15:29:09 | INFO | ============================================================
+15:29:09 | INFO | XAI Adversarial Attack Audit — Attack Pipeline
+15:29:09 | INFO | Models:   ['bert-tiny', 'distilbert', 'bert-base']
+15:29:09 | INFO | Attacks:  ['textfooler', 'pwws']
+15:29:09 | INFO | Seeds:    [42, 123, 999]
+15:29:09 | INFO | Examples: 100 per run
+15:29:09 | INFO | ============================================================
+15:29:09 | INFO | 
+[BERT-TINY | TEXTFOOLER | seed=42]
+15:29:09 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:29:15 | INFO |   Building attack: textfooler (seed=42, n=100)
+15:29:53 | INFO |   Computing USE similarity for 83 examples…
+15:29:57 | INFO |   Done — 83 examples | ASR=100.0% | avg USE sim=0.833
+15:29:57 | INFO | 
+[BERT-TINY | TEXTFOOLER | seed=123]
+15:29:57 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:29:58 | INFO |   Building attack: textfooler (seed=123, n=100)
+15:30:32 | INFO |   Computing USE similarity for 83 examples…
+15:30:32 | INFO |   Done — 83 examples | ASR=100.0% | avg USE sim=0.833
+15:30:32 | INFO | 
+[BERT-TINY | TEXTFOOLER | seed=999]
+15:30:32 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:30:41 | INFO |   Building attack: textfooler (seed=999, n=100)
+15:31:17 | INFO |   Computing USE similarity for 83 examples…
+15:31:17 | INFO |   Done — 83 examples | ASR=100.0% | avg USE sim=0.833
+15:31:17 | INFO | 
+[BERT-TINY | PWWS | seed=42]
+15:31:17 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:31:23 | INFO |   Building attack: pwws (seed=42, n=100)
+15:32:10 | INFO |   Computing USE similarity for 83 examples…
+15:32:10 | INFO |   Done — 83 examples | ASR=91.6% | avg USE sim=0.845
+15:32:10 | INFO | 
+[BERT-TINY | PWWS | seed=123]
+15:32:10 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:32:23 | INFO |   Building attack: pwws (seed=123, n=100)
+15:33:08 | INFO |   Computing USE similarity for 83 examples…
+15:33:09 | INFO |   Done — 83 examples | ASR=91.6% | avg USE sim=0.845
+15:33:09 | INFO | 
+[BERT-TINY | PWWS | seed=999]
+15:33:09 | INFO |   Loading model: M-FAC/bert-tiny-finetuned-sst2
+15:33:10 | INFO |   Building attack: pwws (seed=999, n=100)
+15:33:58 | INFO |   Computing USE similarity for 83 examples…
+15:33:58 | INFO |   Done — 83 examples | ASR=91.6% | avg USE sim=0.845
+15:33:58 | INFO | 
+[DISTILBERT | TEXTFOOLER | seed=42]
+15:33:58 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+15:34:32 | INFO |   Building attack: textfooler (seed=42, n=100)
+15:50:32 | INFO |   Computing USE similarity for 94 examples…
+15:50:33 | INFO |   Done — 94 examples | ASR=97.9% | avg USE sim=0.812
+15:50:33 | INFO | 
+[DISTILBERT | TEXTFOOLER | seed=123]
+15:50:33 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+15:50:34 | INFO |   Building attack: textfooler (seed=123, n=100)
+16:08:19 | INFO |   Computing USE similarity for 94 examples…
+16:08:20 | INFO |   Done — 94 examples | ASR=97.9% | avg USE sim=0.812
+16:08:20 | INFO | 
+[DISTILBERT | TEXTFOOLER | seed=999]
+16:08:20 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+16:08:21 | INFO |   Building attack: textfooler (seed=999, n=100)
+16:29:15 | INFO |   Computing USE similarity for 94 examples…
+16:29:16 | INFO |   Done — 94 examples | ASR=97.9% | avg USE sim=0.812
+16:29:16 | INFO | 
+[DISTILBERT | PWWS | seed=42]
+16:29:16 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+16:29:17 | INFO |   Building attack: pwws (seed=42, n=100)
+17:00:09 | INFO |   Computing USE similarity for 94 examples…
+17:00:10 | INFO |   Done — 94 examples | ASR=88.3% | avg USE sim=0.805
+17:00:10 | INFO | 
+[DISTILBERT | PWWS | seed=123]
+17:00:10 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+17:00:13 | INFO |   Building attack: pwws (seed=123, n=100)
+17:31:06 | INFO |   Computing USE similarity for 94 examples…
+17:31:07 | INFO |   Done — 94 examples | ASR=88.3% | avg USE sim=0.805
+17:31:07 | INFO | 
+[DISTILBERT | PWWS | seed=999]
+17:31:07 | INFO |   Loading model: distilbert-base-uncased-finetuned-sst-2-english
+17:31:09 | INFO |   Building attack: pwws (seed=999, n=100)
+18:01:52 | INFO |   Computing USE similarity for 94 examples…
+18:01:53 | INFO |   Done — 94 examples | ASR=88.3% | avg USE sim=0.805
+18:01:53 | INFO | 
+[BERT-BASE | TEXTFOOLER | seed=42]
+18:01:53 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+18:01:55 | INFO |   Building attack: textfooler (seed=42, n=100)
+18:53:18 | INFO |   Computing USE similarity for 92 examples…
+18:53:19 | INFO |   Done — 92 examples | ASR=97.8% | avg USE sim=0.777
+18:53:19 | INFO | 
+[BERT-BASE | TEXTFOOLER | seed=123]
+18:53:19 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+18:53:21 | INFO |   Building attack: textfooler (seed=123, n=100)
+19:44:35 | INFO |   Computing USE similarity for 92 examples…
+19:44:36 | INFO |   Done — 92 examples | ASR=97.8% | avg USE sim=0.777
+19:44:36 | INFO | 
+[BERT-BASE | TEXTFOOLER | seed=999]
+19:44:36 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+19:44:38 | INFO |   Building attack: textfooler (seed=999, n=100)
+20:35:47 | INFO |   Computing USE similarity for 92 examples…
+20:35:48 | INFO |   Done — 92 examples | ASR=97.8% | avg USE sim=0.777
+20:35:48 | INFO | 
+[BERT-BASE | PWWS | seed=42]
+20:35:48 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+20:35:50 | INFO |   Building attack: pwws (seed=42, n=100)
+21:37:46 | INFO |   Computing USE similarity for 92 examples…
+21:37:47 | INFO |   Done — 92 examples | ASR=84.8% | avg USE sim=0.789
+21:37:47 | INFO | 
+[BERT-BASE | PWWS | seed=123]
+21:37:47 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+21:37:49 | INFO |   Building attack: pwws (seed=123, n=100)
+22:39:41 | INFO |   Computing USE similarity for 92 examples…
+22:39:42 | INFO |   Done — 92 examples | ASR=84.8% | avg USE sim=0.789
+22:39:42 | INFO | 
+[BERT-BASE | PWWS | seed=999]
+22:39:42 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+22:39:44 | INFO |   Building attack: pwws (seed=999, n=100)
+23:41:32 | INFO |   Computing USE similarity for 92 examples…
+23:41:33 | INFO |   Done — 92 examples | ASR=84.8% | avg USE sim=0.789
+23:41:33 | INFO | 
+============================================================
+23:41:33 | INFO | Saved 1614 records → C:\Users\salah\Documents\llm_adversarial_attacks\results\tables\attack_raw_results.csv
+23:41:33 | INFO | Columns: ['model', 'attack', 'seed', 'original_text', 'perturbed_text', 'true_label', 'original_pred', 'perturbed_pred', 'original_correct', 'attack_success', 'n_words_changed', 'pct_words_changed', 'use_similarity']
+23:41:33 | INFO | 
+Quick summary:
+                       n_examples  asr_mean  asr_std  use_sim_mean  pct_words_mean
+model      attack                                                                 
+bert-base  pwws               276    0.8478   0.3598        0.7888          0.1602
+           textfooler         276    0.9783   0.1461        0.7775          0.1601
+bert-tiny  pwws               249    0.9157   0.2785        0.8452          0.1207
+           textfooler         249    1.0000   0.0000        0.8333          0.1194
+distilbert pwws               282    0.8830   0.3220        0.8049          0.1429
+           textfooler         282    0.9787   0.1446        0.8122          0.1390
+23:41:33 | INFO | Quick summary saved → C:\Users\salah\Documents\llm_adversarial_attacks\results\tables\attack_quick_summary.csv

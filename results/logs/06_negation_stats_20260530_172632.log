@@ -1,0 +1,45 @@
+17:26:32 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\06_negation_stats_20260530_172632.log
+17:26:32 | INFO | ============================================================
+17:26:32 | INFO | Negation Paradox Statistics | model=bert-base | n=100
+17:26:32 | INFO | ============================================================
+17:26:32 | INFO | Loading textattack/bert-base-uncased-SST-2…
+17:26:34 | INFO | Loading SST-2 validation…
+17:26:37 | INFO |   Negation examples    : 217
+17:26:37 | INFO |   Non-negation examples: 655
+17:26:37 | INFO | 
+Computing accuracy split…
+17:26:43 | INFO |   Accuracy (WITH negation)    : 92.0%  (92/100)
+17:26:43 | INFO |   Accuracy (WITHOUT negation) : 90.0%  (90/100)
+17:26:43 | INFO |   Accuracy drop due to negation: --2.0%
+17:26:43 | INFO | 
+Computing Negation Flip Rate…
+17:26:47 | INFO |   Flippable examples   : 85
+17:26:47 | INFO |   Prediction SAME      : 55  (64.7%)  ← paradox rate
+17:26:47 | INFO |   Prediction CHANGED   : 30  (35.3%)
+17:26:47 | INFO | 
+============================================================
+17:26:47 | INFO | THESIS-READY SUMMARY
+17:26:47 | INFO | ============================================================
+17:26:47 | INFO |   Model : BERT-BASE
+17:26:47 | INFO |   N     : 85 negation examples testés
+17:26:47 | INFO | 
+17:26:47 | INFO |   ── Accuracy de base ──────────────────────────────────
+17:26:47 | INFO |   Accuracy sur exemples AVEC négation : 92.9%  (79/85)
+17:26:47 | INFO |   Erreurs sur exemples avec négation  : 6  (7.1%)
+17:26:47 | INFO | 
+17:26:47 | INFO |   ── Accuracy selon la réponse à la négation ───────────
+17:26:47 | INFO |   Quand modèle IGNORE la négation     : 92.7% accuracy  (n=55)
+17:26:47 | INFO |   Quand modèle RÉAGIT à la négation   : 93.3% accuracy  (n=30)
+17:26:47 | INFO | 
+17:26:47 | INFO |   ── Negation Flip Rate ────────────────────────────────
+17:26:47 | INFO |   Flip rate (prédiction inchangée)    : 64.7%  (55/85)
+17:26:47 | INFO | 
+17:26:47 | INFO |   ── Erreurs induites par la négation ─────────────────
+17:26:47 | INFO |   N erreurs dues à la négation        : 2  (2.4%)
+17:26:47 | INFO |   → Modèle FAUX avec négation mais CORRECT sans
+17:26:47 | INFO |   → La négation cause directement ces erreurs
+17:26:47 | INFO | 
+17:26:47 | INFO |   → H2 STRONGLY CONFIRMED
+17:26:47 | INFO | Tables saved → negation_stats_summary.csv, negation_flip_details.csv
+17:26:47 | INFO | Figure saved → negation_stats_overview.png
+17:26:47 | INFO | Done.

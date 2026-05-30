@@ -1,0 +1,24 @@
+15:21:55 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\01_run_attacks_20260529_152155.log
+15:21:55 | INFO | ============================================================
+15:21:55 | INFO | XAI Adversarial Attack Audit — Attack Pipeline
+15:21:55 | INFO | Models:   ['bert-base']
+15:21:55 | INFO | Attacks:  ['textfooler']
+15:21:55 | INFO | Seeds:    [42]
+15:21:55 | INFO | Examples: 5 per run
+15:21:55 | INFO | ============================================================
+15:21:55 | INFO | 
+[BERT-BASE | TEXTFOOLER | seed=42]
+15:21:55 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+15:21:56 | INFO |   Building attack: textfooler (seed=42, n=5)
+15:22:55 | INFO |   Computing USE similarity for 5 examples…
+15:23:11 | INFO |   Done — 5 examples | ASR=100.0% | avg USE sim=0.601
+15:23:11 | INFO | 
+============================================================
+15:23:11 | INFO | Saved 5 records → C:\Users\salah\Documents\llm_adversarial_attacks\results\tables\attack_raw_results.csv
+15:23:11 | INFO | Columns: ['model', 'attack', 'seed', 'original_text', 'perturbed_text', 'true_label', 'original_pred', 'perturbed_pred', 'original_correct', 'attack_success', 'n_words_changed', 'pct_words_changed', 'use_similarity']
+15:23:11 | INFO | 
+Quick summary:
+                      n_examples  asr_mean  asr_std  use_sim_mean  pct_words_mean
+model     attack                                                                 
+bert-base textfooler           5       1.0      0.0        0.6014          0.1889
+15:23:11 | INFO | Quick summary saved → C:\Users\salah\Documents\llm_adversarial_attacks\results\tables\attack_quick_summary.csv

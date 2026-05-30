@@ -1,0 +1,17 @@
+15:13:03 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\01_run_attacks_20260529_151303.log
+15:13:03 | INFO | ============================================================
+15:13:03 | INFO | XAI Adversarial Attack Audit — Attack Pipeline
+15:13:03 | INFO | Models:   ['bert-base']
+15:13:03 | INFO | Attacks:  ['textfooler']
+15:13:03 | INFO | Seeds:    [42]
+15:13:03 | INFO | Examples: 5 per run
+15:13:03 | INFO | ============================================================
+15:13:03 | INFO | 
+[BERT-BASE | TEXTFOOLER | seed=42]
+15:13:03 | INFO |   Loading model: textattack/bert-base-uncased-SST-2
+15:13:53 | INFO |   Building attack: textfooler (seed=42, n=5)
+15:15:01 | ERROR |   FAILED: Lazy module loader cannot find module named `tensorflow_hub`. This might be because TextAttack does not automatically install some optional dependencies. Please run `pip install tensorflow_hub` to install the package.
+15:15:01 | INFO | 
+============================================================
+15:15:01 | INFO | Saved 0 records → C:\Users\salah\Documents\llm_adversarial_attacks\results\tables\attack_raw_results.csv
+15:15:01 | INFO | Columns: []

@@ -1,0 +1,7 @@
+model,attack,n_examples,asr_mean,asr_std,use_sim_mean,pct_words_mean
+bert-base,pwws,276,0.8478,0.3598,0.7888,0.1602
+bert-base,textfooler,276,0.9783,0.1461,0.7775,0.1601
+bert-tiny,pwws,249,0.9157,0.2785,0.8452,0.1207
+bert-tiny,textfooler,249,1.0,0.0,0.8333,0.1194
+distilbert,pwws,282,0.883,0.322,0.8049,0.1429
+distilbert,textfooler,282,0.9787,0.1446,0.8122,0.139

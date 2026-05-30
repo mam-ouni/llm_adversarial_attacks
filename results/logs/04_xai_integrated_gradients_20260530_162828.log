@@ -1,0 +1,60 @@
+16:28:28 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\04_xai_integrated_gradients_20260530_162828.log
+16:28:28 | INFO | ============================================================
+16:28:28 | INFO | Captum Integrated Gradients — Negation Paradox
+16:28:28 | INFO | Model: bert-base | n_steps: 50
+16:28:28 | INFO | ============================================================
+16:28:28 | INFO | Loading textattack/bert-base-uncased-SST-2…
+16:28:30 | INFO | 
+Example 1: "I don't think that this film is good"
+16:28:31 | INFO |   Prediction: negative (99.89%) | Convergence delta: 1.0782
+16:28:31 | INFO |   Top tokens by |attribution|:
+16:28:31 | INFO |     that            -1.0191  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:31 | INFO |     think           -0.9081  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:31 | INFO |     [SEP]           +0.8266  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:31 | INFO |     t               -0.6343  ▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:31 | INFO |     don             -0.4460  ▓▓▓▓▓▓▓▓
+16:28:31 | INFO |     [CLS]           -0.3566  ▓▓▓▓▓▓
+16:28:31 | INFO | 
+Example 2: "It is not a great movie at all"
+16:28:32 | INFO |   Prediction: negative (99.92%) | Convergence delta: 0.5584
+16:28:32 | INFO |   Top tokens by |attribution|:
+16:28:32 | INFO |     not             -0.8444  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:32 | INFO |     [CLS]           -0.4170  ▓▓▓▓▓▓▓▓▓
+16:28:32 | INFO |     a               -0.3590  ▓▓▓▓▓▓▓▓
+16:28:32 | INFO |     at              -0.3538  ▓▓▓▓▓▓▓▓
+16:28:32 | INFO |     is              -0.2879  ▓▓▓▓▓▓
+16:28:32 | INFO |     movie           -0.2760  ▓▓▓▓▓▓
+16:28:32 | INFO | 
+Example 3: "I wouldn't say this performance is impressive"
+16:28:32 | INFO |   Prediction: positive (95.88%) | Convergence delta: 0.6390
+16:28:32 | INFO |   Top tokens by |attribution|:
+16:28:32 | INFO |     impressive      +3.3464  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:32 | INFO |     say             -1.0233  ▓▓▓▓▓▓
+16:28:32 | INFO |     [SEP]           -0.7722  ▓▓▓▓
+16:28:32 | INFO |     is              -0.5121  ▓▓▓
+16:28:32 | INFO |     wouldn          +0.4402  ▓▓
+16:28:32 | INFO |     '               +0.4081  ▓▓
+16:28:32 | INFO | 
+Example 4: "Nobody could claim this plot is interesting"
+16:28:33 | INFO |   Prediction: positive (83.30%) | Convergence delta: 0.1164
+16:28:33 | INFO |   Top tokens by |attribution|:
+16:28:33 | INFO |     interesting     +2.9919  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     nobody          -2.1081  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     [SEP]           -1.1028  ▓▓▓▓▓▓▓
+16:28:33 | INFO |     is              -0.5770  ▓▓▓
+16:28:33 | INFO |     this            +0.5393  ▓▓▓
+16:28:33 | INFO |     claim           +0.5004  ▓▓▓
+16:28:33 | INFO | 
+Example 5: "I don't find the acting compelling"
+16:28:33 | INFO |   Prediction: negative (99.92%) | Convergence delta: 1.0960
+16:28:33 | INFO |   Top tokens by |attribution|:
+16:28:33 | INFO |     [SEP]           +1.2980  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     t               -0.6727  ▓▓▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     the             -0.5660  ▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     acting          -0.5209  ▓▓▓▓▓▓▓▓
+16:28:33 | INFO |     don             -0.5149  ▓▓▓▓▓▓▓
+16:28:33 | INFO |     find            -0.3785  ▓▓▓▓▓
+16:28:33 | INFO | 
+Attributions saved → ig_negation_attributions.csv
+16:28:33 | INFO | Generating figures…
+16:28:35 | INFO | Done.

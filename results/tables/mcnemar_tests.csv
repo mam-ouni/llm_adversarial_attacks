@@ -1,0 +1,7 @@
+model,attack,n_concordant,n_b,n_c,chi2,p_value,significant,sig_label
+bert-base,pwws,42,234,0,232.0043,0.0,True,***
+bert-base,textfooler,6,270,0,268.0037,0.0,True,***
+bert-tiny,pwws,21,228,0,226.0044,0.0,True,***
+bert-tiny,textfooler,0,249,0,247.004,0.0,True,***
+distilbert,pwws,33,249,0,247.004,0.0,True,***
+distilbert,textfooler,6,276,0,274.0036,0.0,True,***

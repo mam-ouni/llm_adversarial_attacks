@@ -1,0 +1,43 @@
+16:46:29 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\04_xai_integrated_gradients_20260530_164629.log
+16:46:29 | INFO | ============================================================
+16:46:29 | INFO | Captum Integrated Gradients — Negation Paradox
+16:46:29 | INFO | Model: bert-base | n_steps: 50
+16:46:29 | INFO | ============================================================
+16:46:29 | INFO | Loading textattack/bert-base-uncased-SST-2…
+16:46:31 | INFO | 
+============================================================
+16:46:31 | INFO | MINIMAL PAIR ANALYSIS
+16:46:31 | INFO | ============================================================
+16:46:31 | INFO | Testing: does adding one 'not' change the model's decision?
+16:46:31 | INFO | 
+  [Single negation]
+16:46:31 | INFO |   Text     : "I don't think that this film is good"
+16:46:31 | INFO |   Expected : negative
+16:46:32 | INFO |   Predicted: negative (99.89%)  →  ✓ CORRECT
+16:46:32 | INFO |   Top tokens:
+16:46:32 | INFO |     that            -1.0191  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:46:32 | INFO |     think           -0.9081  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:46:32 | INFO |     [SEP]           +0.8266  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:46:32 | INFO |     t               -0.6343  ▓▓▓▓▓▓▓▓▓▓▓▓
+16:46:32 | INFO |     don             -0.4460  ▓▓▓▓▓▓▓▓
+16:46:32 | INFO | 
+  [Double negation]
+16:46:32 | INFO |   Text     : "I don't think that this film is not good"
+16:46:32 | INFO |   Expected : positive
+16:46:33 | INFO |   Predicted: negative (99.91%)  →  ✗ WRONG
+16:46:33 | INFO |   Top tokens:
+16:46:33 | INFO |     [SEP]           -2.3212  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+16:46:33 | INFO |     not             -0.9619  ▓▓▓▓▓▓▓▓
+16:46:33 | INFO |     [CLS]           -0.5607  ▓▓▓▓
+16:46:33 | INFO |     good            -0.4171  ▓▓▓
+16:46:33 | INFO |     don             -0.3009  ▓▓
+16:46:33 | INFO | 
+────────────────────────────────────────────────────────────
+16:46:33 | INFO | COMPARISON SUMMARY:
+16:46:33 | INFO |   Single negation           → pred=negative   expected=negative   ✓
+16:46:33 | INFO |   Double negation           → pred=negative   expected=positive   ✗
+16:46:33 | INFO | 
+  → BOTH PREDICTED THE SAME CLASS — strong H2 evidence:
+    adding 'not' did NOT change the model's decision.
+16:46:33 | INFO |   Saved → ig_minimal_pair.csv
+16:46:33 | INFO | Done (pair_only mode).

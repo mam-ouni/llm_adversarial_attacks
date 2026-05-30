@@ -1,0 +1,33 @@
+16:15:41 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\03_xai_shap_pos_20260530_161541.log
+16:15:41 | INFO | ============================================================
+16:15:41 | INFO | XAI Detailed POS Analysis — bert-base | n=50
+16:15:41 | INFO | Levels: broad POS / fine-grained POS / functional / VADER
+16:15:41 | INFO | ============================================================
+16:15:41 | INFO | Loading textattack/bert-base-uncased-SST-2…
+16:15:43 | INFO | Loading SST-2 validation…
+16:15:47 | INFO | Using 50 examples
+16:15:47 | INFO |   Building SHAP Partition explainer…
+16:15:47 | INFO |   Computing SHAP for 50 texts…
+16:16:54 | INFO |   Tagging tokens and computing categories…
+16:16:54 | INFO |   Token scores saved — 829 rows
+16:16:54 | INFO | All tables saved
+16:16:54 | INFO | 
+Broad POS importance:
+16:16:54 | INFO |   adjective      31.2%  ███████████████
+16:16:54 | INFO |   verb           14.2%  ███████
+16:16:54 | INFO |   noun           12.5%  ██████
+16:16:54 | INFO |   adverb         24.6%  ████████████
+16:16:54 | INFO |   stopword       10.8%  █████
+16:16:54 | INFO |   other           6.7%  ███
+16:16:54 | INFO | 
+Functional groups (top 5):
+16:16:54 | INFO |   adj_negative           38.5%
+16:16:54 | INFO |   adverb                 11.0%
+16:16:54 | INFO |   adj_neutral            10.9%
+16:16:54 | INFO |   intensifier             9.2%
+16:16:54 | INFO |   verb                    6.0%
+16:16:54 | INFO | 
+  → Negation importance: 4.28% (H2 evidence)
+16:16:54 | INFO | 
+Generating figures…
+16:16:56 | INFO | Done — all figures saved to results/figures/

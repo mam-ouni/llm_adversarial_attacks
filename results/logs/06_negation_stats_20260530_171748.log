@@ -1,0 +1,37 @@
+17:17:48 | INFO | Log file: C:\Users\salah\Documents\llm_adversarial_attacks\results\logs\06_negation_stats_20260530_171748.log
+17:17:48 | INFO | ============================================================
+17:17:48 | INFO | Negation Paradox Statistics | model=bert-base | n=100
+17:17:48 | INFO | ============================================================
+17:17:48 | INFO | Loading textattack/bert-base-uncased-SST-2…
+17:17:50 | INFO | Loading SST-2 validation…
+17:17:54 | INFO |   Negation examples    : 217
+17:17:54 | INFO |   Non-negation examples: 655
+17:17:54 | INFO | 
+Computing accuracy split…
+17:17:59 | INFO |   Accuracy (WITH negation)    : 92.0%  (92/100)
+17:17:59 | INFO |   Accuracy (WITHOUT negation) : 90.0%  (90/100)
+17:17:59 | INFO |   Accuracy drop due to negation: --2.0%
+17:17:59 | INFO | 
+Computing Negation Flip Rate…
+17:18:03 | INFO |   Flippable examples   : 85
+17:18:03 | INFO |   Prediction SAME      : 55  (64.7%)  ← paradox rate
+17:18:03 | INFO |   Prediction CHANGED   : 30  (35.3%)
+17:18:03 | INFO | 
+============================================================
+17:18:03 | INFO | THESIS-READY SUMMARY
+17:18:03 | INFO | ============================================================
+17:18:03 | INFO |   Model : BERT-BASE
+17:18:03 | INFO |   N     : 85 negation examples tested
+17:18:03 | INFO | 
+17:18:03 | INFO |   Accuracy WITH negation    : 92.0%
+17:18:03 | INFO |   Accuracy WITHOUT negation : 90.0%
+17:18:03 | INFO |   Gap                       : --2.0%
+17:18:03 | INFO | 
+17:18:03 | INFO |   Negation Flip Rate        : 64.7%
+17:18:03 | INFO |   → Removing negation leaves the prediction UNCHANGED
+17:18:03 | INFO |     in 64.7% of cases.
+17:18:03 | INFO |   → H2 STRONGLY CONFIRMED
+17:18:03 | INFO | 
+Tables saved → negation_stats_summary.csv, negation_flip_details.csv
+17:18:04 | INFO | Figure saved → negation_stats_overview.png
+17:18:04 | INFO | Done.

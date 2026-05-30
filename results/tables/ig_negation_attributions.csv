@@ -1,0 +1,53 @@
+example_idx,text,token,attribution,pred_label,pred_prob,model
+0,I don't think that this film is good,[CLS],-0.356602,negative,0.9989,bert-base
+0,I don't think that this film is good,i,-0.154074,negative,0.9989,bert-base
+0,I don't think that this film is good,don,-0.446011,negative,0.9989,bert-base
+0,I don't think that this film is good,',-0.168271,negative,0.9989,bert-base
+0,I don't think that this film is good,t,-0.634293,negative,0.9989,bert-base
+0,I don't think that this film is good,think,-0.908112,negative,0.9989,bert-base
+0,I don't think that this film is good,that,-1.01915,negative,0.9989,bert-base
+0,I don't think that this film is good,this,0.270743,negative,0.9989,bert-base
+0,I don't think that this film is good,film,-0.231925,negative,0.9989,bert-base
+0,I don't think that this film is good,is,-0.075799,negative,0.9989,bert-base
+0,I don't think that this film is good,good,0.244137,negative,0.9989,bert-base
+0,I don't think that this film is good,[SEP],0.826561,negative,0.9989,bert-base
+1,It is not a great movie at all,[CLS],-0.416995,negative,0.9992,bert-base
+1,It is not a great movie at all,it,-0.083662,negative,0.9992,bert-base
+1,It is not a great movie at all,is,-0.287944,negative,0.9992,bert-base
+1,It is not a great movie at all,not,-0.844396,negative,0.9992,bert-base
+1,It is not a great movie at all,a,-0.358966,negative,0.9992,bert-base
+1,It is not a great movie at all,great,-0.112368,negative,0.9992,bert-base
+1,It is not a great movie at all,movie,-0.276005,negative,0.9992,bert-base
+1,It is not a great movie at all,at,-0.353835,negative,0.9992,bert-base
+1,It is not a great movie at all,all,-0.252546,negative,0.9992,bert-base
+1,It is not a great movie at all,[SEP],-0.080112,negative,0.9992,bert-base
+2,I wouldn't say this performance is impressive,[CLS],-0.36845,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,i,0.321544,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,wouldn,0.440164,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,',0.408109,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,t,0.159441,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,say,-1.023288,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,this,-0.357649,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,performance,0.137691,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,is,-0.512066,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,impressive,3.346429,positive,0.9588,bert-base
+2,I wouldn't say this performance is impressive,[SEP],-0.772188,positive,0.9588,bert-base
+3,Nobody could claim this plot is interesting,[CLS],-0.482683,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,nobody,-2.108071,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,could,0.408976,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,claim,0.50044,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,this,0.53926,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,plot,0.094132,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,is,-0.577031,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,interesting,2.991888,positive,0.833,bert-base
+3,Nobody could claim this plot is interesting,[SEP],-1.102772,positive,0.833,bert-base
+4,I don't find the acting compelling,[CLS],-0.286538,negative,0.9992,bert-base
+4,I don't find the acting compelling,i,-0.194689,negative,0.9992,bert-base
+4,I don't find the acting compelling,don,-0.514919,negative,0.9992,bert-base
+4,I don't find the acting compelling,',-0.369976,negative,0.9992,bert-base
+4,I don't find the acting compelling,t,-0.672674,negative,0.9992,bert-base
+4,I don't find the acting compelling,find,-0.378491,negative,0.9992,bert-base
+4,I don't find the acting compelling,the,-0.566008,negative,0.9992,bert-base
+4,I don't find the acting compelling,acting,-0.520897,negative,0.9992,bert-base
+4,I don't find the acting compelling,compelling,-0.332172,negative,0.9992,bert-base
+4,I don't find the acting compelling,[SEP],1.298017,negative,0.9992,bert-base

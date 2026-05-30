@@ -210,10 +210,158 @@ def plot_single_example_bar(res: dict, example_idx: int) -> None:
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
+def plot_minimal_pair(pair_results: list[dict], pairs: list[dict],
+                      model_key: str) -> None:
+    """
+    Side-by-side bar chart for a minimal pair.
+    Shows how attribution changes when a single 'not' is added.
+
+    Key visual for H2: if the model understood syntax, the two charts
+    would look mirror-opposite. If it's blind to syntax, they look similar.
+    """
+    apply_thesis_style()
+
+    label_map = {0: "Negative", 1: "Positive"}
+    fig, axes = plt.subplots(1, 2, figsize=(14, 4.5), sharey=False)
+
+    for ax, res, pair in zip(axes, pair_results, pairs):
+        # Filter special tokens
+        tokens = [t for t in res["tokens"]
+                  if t not in ("[CLS]", "[SEP]", "<s>", "</s>")]
+        attrs  = [a for t, a in zip(res["tokens"], res["attributions"])
+                  if t not in ("[CLS]", "[SEP]", "<s>", "</s>")]
+
+        bar_colors = [COLORS["clean"] if v > 0 else COLORS["attacked"]
+                      for v in attrs]
+
+        bars = ax.bar(range(len(tokens)), attrs,
+                      color=bar_colors, edgecolor="white",
+                      linewidth=0.5, width=0.65)
+
+        ax.axhline(0, color="#444441", linewidth=0.8)
+        ax.set_xticks(range(len(tokens)))
+        ax.set_xticklabels(tokens, rotation=40, ha="right", fontsize=10)
+        ax.set_ylabel("Attribution score", fontsize=10)
+
+        pred_str     = label_map[res["pred_label"]]
+        expected_str = pair["expected_sentiment"].capitalize()
+        match        = "✓" if pred_str.lower() == pair["expected_sentiment"] else "✗"
+
+        ax.set_title(
+            f"{pair['label']}\n"
+            f"\"{pair['text']}\"\n"
+            f"Expected: {expected_str} | Predicted: {pred_str} {match} ({res['pred_prob']:.0%})",
+            fontsize=10, pad=8,
+            color="#085041" if match == "✓" else "#791F1F"
+        )
+
+        # Highlight the token that differs between the two (the added "not")
+        for j, tok in enumerate(tokens):
+            if tok.lower() in ("not", "n't", "nt") and pair["label"] == "Double negation":
+                ax.get_children()[j].set_edgecolor("#E24B4A")
+                ax.get_children()[j].set_linewidth(2)
+
+    from matplotlib.patches import Patch
+    handles = [
+        Patch(color=COLORS["clean"],    label="→ Positive signal"),
+        Patch(color=COLORS["attacked"], label="→ Negative signal"),
+    ]
+    fig.legend(handles=handles, fontsize=9, frameon=False,
+               loc="lower center", ncol=2, bbox_to_anchor=(0.5, -0.02))
+
+    fig.suptitle(
+        f"Minimal Pair Analysis — Integrated Gradients | {model_key.upper()}\n"
+        "H2: Does adding 'not' change the model's decision?",
+        fontsize=12, y=1.02, fontweight="medium"
+    )
+    fig.tight_layout()
+    save_figure(fig, "ig_minimal_pair_comparison")
+
+
+def run_minimal_pair_analysis(model, tokenizer, device, n_steps, logger):
+    """
+    Run IG on the minimal pair and log the comparison.
+    """
+    from config import MINIMAL_PAIRS
+    label_map = {0: "negative", 1: "positive"}
+
+    logger.info("\n" + "=" * 60)
+    logger.info("MINIMAL PAIR ANALYSIS")
+    logger.info("=" * 60)
+    logger.info("Testing: does adding one 'not' change the model's decision?")
+
+    pair_results = []
+    pair_rows    = []
+
+    for pair in MINIMAL_PAIRS:
+        logger.info(f"\n  [{pair['label']}]")
+        logger.info(f"  Text     : \"{pair['text']}\"")
+        logger.info(f"  Expected : {pair['expected_sentiment']}")
+
+        res = compute_ig_attributions(
+            pair["text"], model, tokenizer, device, n_steps, target_label=1
+        )
+        pair_results.append(res)
+
+        pred_str  = label_map[res["pred_label"]]
+        match     = "✓ CORRECT" if pred_str == pair["expected_sentiment"] else "✗ WRONG"
+        logger.info(f"  Predicted: {pred_str} ({res['pred_prob']:.2%})  →  {match}")
+
+        ranked = sorted(
+            zip(res["tokens"], res["attributions"]),
+            key=lambda x: abs(x[1]), reverse=True
+        )[:5]
+        logger.info("  Top tokens:")
+        for tok, val in ranked:
+            bar = "▓" * int(abs(val) / max(abs(res["attributions"])) * 20)
+            logger.info(f"    {tok:<15} {val:+.4f}  {bar}")
+
+        for tok, val in zip(res["tokens"], res["attributions"]):
+            pair_rows.append({
+                "pair_label":  pair["label"],
+                "text":        pair["text"],
+                "expected":    pair["expected_sentiment"],
+                "predicted":   pred_str,
+                "correct":     int(pred_str == pair["expected_sentiment"]),
+                "token":       tok,
+                "attribution": round(float(val), 6),
+            })
+
+    # Key comparison log
+    logger.info("\n" + "─" * 60)
+    logger.info("COMPARISON SUMMARY:")
+    for pair, res in zip(MINIMAL_PAIRS, pair_results):
+        pred  = label_map[res["pred_label"]]
+        match = "✓" if pred == pair["expected_sentiment"] else "✗"
+        logger.info(
+            f"  {pair['label']:<25} → pred={pred:<10} expected={pair['expected_sentiment']:<10} {match}"
+        )
+
+    if pair_results[0]["pred_label"] == pair_results[1]["pred_label"]:
+        logger.info(
+            "\n  → BOTH PREDICTED THE SAME CLASS — strong H2 evidence:"
+            "\n    adding 'not' did NOT change the model's decision."
+        )
+    else:
+        logger.info(
+            "\n  → Different predictions — model partially handles double negation."
+        )
+
+    # Save CSV
+    pd.DataFrame(pair_rows).to_csv(
+        TABLES_DIR / "ig_minimal_pair.csv", index=False
+    )
+    logger.info("  Saved → ig_minimal_pair.csv")
+
+    return pair_results
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default=None)
+    parser.add_argument("--model",   default=None)
     parser.add_argument("--n_steps", type=int, default=None)
+    parser.add_argument("--pair_only", action="store_true",
+                        help="Run only the minimal pair analysis (faster)")
     args = parser.parse_args()
 
     model_key = args.model   or XAI_MODEL_KEY
@@ -235,10 +383,20 @@ def main():
     device    = "cuda" if torch.cuda.is_available() else "cpu"
     model.to(device).eval()
 
-    # ── Compute attributions ───────────────────────────────────────────────────
-    all_results  = []
-    all_rows     = []
-    label_map    = {0: "negative", 1: "positive"}
+    label_map = {0: "negative", 1: "positive"}
+
+    # ── Minimal pair analysis (always runs) ────────────────────────────────────
+    from config import MINIMAL_PAIRS
+    pair_results = run_minimal_pair_analysis(model, tokenizer, device, n_steps, logger)
+    plot_minimal_pair(pair_results, MINIMAL_PAIRS, model_key)
+
+    if args.pair_only:
+        logger.info("Done (pair_only mode).")
+        return
+
+    # ── Full negation examples ─────────────────────────────────────────────────
+    all_results = []
+    all_rows    = []
 
     for i, text in enumerate(NEGATION_EXAMPLES):
         logger.info(f"\nExample {i+1}: \"{text}\"")
@@ -253,7 +411,6 @@ def main():
             f"Convergence delta: {res['delta']:.4f}"
         )
 
-        # Show top tokens
         ranked = sorted(
             zip(res["tokens"], res["attributions"]),
             key=lambda x: abs(x[1]), reverse=True
@@ -263,27 +420,24 @@ def main():
             bar = "▓" * int(abs(val) / max(abs(res["attributions"])) * 20)
             logger.info(f"    {tok:<15} {val:+.4f}  {bar}")
 
-        # Collect rows for CSV
         for tok, val in zip(res["tokens"], res["attributions"]):
             all_rows.append({
-                "example_idx":   i,
-                "text":          text,
-                "token":         tok,
-                "attribution":   round(float(val), 6),
-                "pred_label":    label_map[res["pred_label"]],
-                "pred_prob":     round(res["pred_prob"], 4),
-                "model":         model_key,
+                "example_idx": i,
+                "text":        text,
+                "token":       tok,
+                "attribution": round(float(val), 6),
+                "pred_label":  label_map[res["pred_label"]],
+                "pred_prob":   round(res["pred_prob"], 4),
+                "model":       model_key,
             })
 
-    # ── Save table ─────────────────────────────────────────────────────────────
+    # ── Save & plot ────────────────────────────────────────────────────────────
     df = pd.DataFrame(all_rows)
     df.to_csv(TABLES_DIR / "ig_negation_attributions.csv", index=False)
     logger.info("\nAttributions saved → ig_negation_attributions.csv")
 
-    # ── Generate figures ───────────────────────────────────────────────────────
     logger.info("Generating figures…")
     plot_negation_heatmap(all_results)
-
     for i, res in enumerate(all_results):
         plot_single_example_bar(res, i)
 

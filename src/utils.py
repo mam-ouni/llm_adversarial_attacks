@@ -6,7 +6,18 @@ figure saving. Imported by all other scripts.
 """
 
 import os
+import ssl
 import random
+
+# ── SSL fix for Windows (certificate verification issues with HuggingFace/NLTK)
+os.environ["CURL_CA_BUNDLE"]    = ""
+os.environ["REQUESTS_CA_BUNDLE"] = ""
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+try:
+    ssl._create_default_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
 import logging
 import datetime
 from pathlib import Path

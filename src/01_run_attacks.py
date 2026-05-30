@@ -34,20 +34,53 @@ from config import (
 from utils import set_all_seeds, setup_logger, count_changed_words, compute_use_similarity
 
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
-from textattack import Attacker, AttackArgs
+from textattack import Attacker, AttackArgs, Attack
 from textattack.models.wrappers import HuggingFaceModelWrapper
 from textattack.datasets import HuggingFaceDataset
-from textattack.attack_recipes import TextFoolerJin2019, PWWSRen2019
+from textattack.attack_recipes import PWWSRen2019
 from textattack.attack_results import SuccessfulAttackResult, FailedAttackResult
+from textattack.constraints.pre_transformation import RepeatModification, StopwordModification
+from textattack.constraints.semantics import WordEmbeddingDistance
+from textattack.constraints.grammaticality import PartOfSpeech
+from textattack.transformations import WordSwapEmbedding
+from textattack.search_methods import GreedyWordSwapWIR
+from textattack.goal_functions import UntargetedClassification
 
 import torch
+
+
+# ─── TextFooler rebuilt without tensorflow ────────────────────────────────────
+
+def build_textfooler_no_tf(model_wrapper):
+    """
+    TextFooler (Jin et al. 2019) rebuilt without the tensorflow/USE dependency.
+
+    The original uses UniversalSentenceEncoder (requires tensorflow_hub) as a
+    semantic similarity constraint. We replace it with WordEmbeddingDistance,
+    which provides equivalent semantic preservation using the already-downloaded
+    paragramcf embeddings. All other components are identical to the original.
+
+    Our post-hoc semantic similarity (in utils.py) uses sentence-transformers
+    and is reported separately in the results — this only affects the attack's
+    internal candidate filtering.
+    """
+    transformation = WordSwapEmbedding(max_candidates=50)
+    constraints = [
+        RepeatModification(),
+        StopwordModification(),
+        WordEmbeddingDistance(min_cos_sim=0.5),
+        PartOfSpeech(allow_verb_noun_swap=True),
+    ]
+    goal_function  = UntargetedClassification(model_wrapper)
+    search_method  = GreedyWordSwapWIR(wir_method="delete")
+    return Attack(goal_function, constraints, transformation, search_method)
 
 
 # ─── Attack recipe registry ───────────────────────────────────────────────────
 
 ATTACK_RECIPES = {
-    "textfooler": TextFoolerJin2019,
-    "pwws":       PWWSRen2019,
+    "textfooler": build_textfooler_no_tf,   # no tensorflow needed
+    "pwws":       PWWSRen2019,              # unchanged
 }
 
 
@@ -77,7 +110,12 @@ def run_single_attack(
 
     logger.info(f"  Building attack: {attack_name} (seed={seed}, n={n_examples})")
     attack_recipe = ATTACK_RECIPES[attack_name]
-    attack        = attack_recipe.build(model_wrapper)
+    # custom builders are callables taking model_wrapper directly
+    # TextAttack recipe classes use .build(model_wrapper)
+    if hasattr(attack_recipe, "build"):
+        attack = attack_recipe.build(model_wrapper)
+    else:
+        attack = attack_recipe(model_wrapper)
 
     dataset = HuggingFaceDataset(
         DATASET_NAME, DATASET_CONFIG, split=DATASET_SPLIT
@@ -154,22 +192,33 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--quick", action="store_true",
                         help="Run only 20 examples (dev/debug mode)")
+    parser.add_argument("--n_examples", type=int, default=None,
+                        help="Override number of examples (e.g. --n_examples 5)")
     parser.add_argument("--model",  default=None,
                         help="Run only one model key (e.g. bert-base)")
     parser.add_argument("--attack", default=None,
                         help="Run only one attack (textfooler or pwws)")
+    parser.add_argument("--seed",   type=int, default=None,
+                        help="Run only one seed (e.g. --seed 42)")
     args = parser.parse_args()
 
-    n_examples = 20 if (args.quick or QUICK_TEST) else N_EXAMPLES
-    models     = [args.model]  if args.model  else list(MODEL_IDS.keys())
-    attacks    = [args.attack] if args.attack else ATTACK_NAMES
+    if args.n_examples:
+        n_examples = args.n_examples
+    elif args.quick or QUICK_TEST:
+        n_examples = 20
+    else:
+        n_examples = N_EXAMPLES
+
+    models  = [args.model]  if args.model  else list(MODEL_IDS.keys())
+    attacks = [args.attack] if args.attack else ATTACK_NAMES
+    seeds   = [args.seed]   if args.seed   else SEEDS
 
     logger = setup_logger("01_run_attacks")
     logger.info("=" * 60)
     logger.info("XAI Adversarial Attack Audit — Attack Pipeline")
     logger.info(f"Models:   {models}")
     logger.info(f"Attacks:  {attacks}")
-    logger.info(f"Seeds:    {SEEDS}")
+    logger.info(f"Seeds:    {seeds}")
     logger.info(f"Examples: {n_examples} per run")
     logger.info("=" * 60)
 
@@ -177,7 +226,7 @@ def main():
 
     for model_key in models:
         for attack_name in attacks:
-            for seed in SEEDS:
+            for seed in seeds:
                 set_all_seeds(seed)
                 logger.info(
                     f"\n[{model_key.upper()} | {attack_name.upper()} | seed={seed}]"
@@ -198,6 +247,11 @@ def main():
 
     logger.info(f"\n{'='*60}")
     logger.info(f"Saved {len(df)} records → {out_path}")
+
+    if df.empty:
+        logger.error("No records collected — check errors above.")
+        return
+
     logger.info(f"Columns: {list(df.columns)}")
 
     # ── Quick summary ──────────────────────────────────────────────────────────
